@@ -1,0 +1,37 @@
+{% set name = "flexure" %}
+{% set version = "0.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  path: ..
+
+requirements:
+  build:
+    - python
+    - numpy x.x
+    - landlab
+  run:
+    - python
+    - numpy x.x
+    - landlab
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
+
+test:
+  requirements:
+    - nose
+  imports:
+    - flexure
+  commands:
+    - nosetests --with-doctest flexure
+
+about:
+  home: https://github.com/landlab/flexure
+  license: MIT
+  summary: Deform the lithosphere with 1D or 2D flexure.
+  dev_url: https://github.com/landlab/flexure
